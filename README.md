@@ -24,6 +24,10 @@
 3. Run `npm run dev` to run the project locally.
 4. Run `npm run deploy` to deploy the project to Cloudflare Workers.
 
+## URL of the deployed project
+
+https://hono-minery.edgefranmoreno.workers.dev/
+
 ## How to use the API
 
 The API has the following endpoints for warehouses:
