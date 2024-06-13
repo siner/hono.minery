@@ -6,3 +6,11 @@ export type Warehouse = {
 };
 
 export type Warehouses = Warehouse[];
+
+export type Product = {
+  id: string;
+  name: string;
+  warehouse_ids: string[];
+};
+
+export type Products = Product[];
