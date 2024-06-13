@@ -1,0 +1,23 @@
+meta {
+  name: Create Delivery
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseurl}}/deliveries
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "lat": "37.5",
+    "lon": "118.6",
+    "product_ids": [
+      "1",
+      "2"
+    ],
+    "delivery_date" : "2024-06-13"
+  }
+}

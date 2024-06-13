@@ -1,4 +1,11 @@
-import { Warehouses, Products } from "./types";
+import {
+  Warehouses,
+  Products,
+  Delivery,
+  Route,
+  Deliveries,
+  Routes,
+} from "./types";
 
 export const warehouses = [
   {
@@ -37,3 +44,6 @@ export const products = [
     warehouse_ids: [],
   },
 ] as Products;
+
+export const deliveries = [] as Deliveries;
+export const routes = [] as Routes;

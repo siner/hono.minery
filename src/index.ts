@@ -1,6 +1,6 @@
 import { Hono } from "hono";
-import { Warehouse, Product } from "./types";
-import { warehouses, products } from "./tempdb";
+import { Warehouse, Product, Route, Delivery, Routes, Waypoint } from "./types";
+import { warehouses, products, deliveries, routes } from "./tempdb";
 
 const app = new Hono();
 
@@ -67,6 +67,54 @@ app.post("/products", async (c) => {
   };
   products.push(product);
   return c.json(product, 201);
+});
+
+app.get("/deliveries", (c) => {
+  return c.json(deliveries);
+});
+
+app.post("/deliveries", async (c) => {
+  const body = await c.req.json();
+  if (body instanceof Error) {
+    return c.json({ message: "Invalid request body" }, 400);
+  }
+  const { product_ids, lat, lon, delivery_date } = body;
+  if (!product_ids || !lat || !lon || !delivery_date) {
+    return c.json({ message: "Missing required fields" }, 400);
+  }
+  const delivery: Delivery = {
+    product_ids,
+    lat,
+    lon,
+    delivery_date,
+    id: Math.random().toString(36).substr(2, 9),
+  };
+  deliveries.push(delivery);
+  return c.json(delivery, 201);
+});
+
+app.get("/routes", (c) => {
+  return c.json(routes);
+});
+
+app.post("/routes", async (c) => {
+  const body = await c.req.json();
+  if (body instanceof Error) {
+    return c.json({ message: "Invalid request body" }, 400);
+  }
+  const { delivery_ids } = body;
+  if (!delivery_ids) {
+    return c.json({ message: "Missing required fields" }, 400);
+  }
+  const route: Waypoint[] = [];
+  const distance = Math.random() * 100;
+  const newRoute: Route = {
+    delivery_ids,
+    route,
+    distance,
+  };
+  routes.push(newRoute);
+  return c.json(newRoute, 201);
 });
 
 export default app;

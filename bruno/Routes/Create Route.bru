@@ -1,0 +1,20 @@
+meta {
+  name: Create Route
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseurl}}/routes
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "delivery_ids": [
+      "1",
+      "2"
+    ]
+  }
+}
