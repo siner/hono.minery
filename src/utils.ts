@@ -2,21 +2,21 @@ import { Route, Waypoint } from "./types";
 import { deliveries, warehouses, products } from "./tempdb";
 
 function getDistanceFromLatLonInKm(
-  lat1: string | undefined,
-  lon1: string | undefined,
-  lat2: string | undefined,
-  lon2: string | undefined
+  lat1: number | undefined,
+  lon1: number | undefined,
+  lat2: number | undefined,
+  lon2: number | undefined
 ) {
   if (!lat1 || !lon1 || !lat2 || !lon2) {
     return 0;
   }
   var R = 6371; // Radius of the earth in km
-  var dLat = deg2rad(parseFloat(lat2) - parseFloat(lat1)); // deg2rad below
-  var dLon = deg2rad(parseFloat(lon2) - parseFloat(lon1));
+  var dLat = deg2rad(lat2 - lat1); // deg2rad below
+  var dLon = deg2rad(lon2 - lon1);
   var a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(deg2rad(parseFloat(lat1))) *
-      Math.cos(deg2rad(parseFloat(lat2))) *
+    Math.cos(deg2rad(lat1)) *
+      Math.cos(deg2rad(lat2)) *
       Math.sin(dLon / 2) *
       Math.sin(dLon / 2);
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
@@ -61,7 +61,7 @@ export function calculateRoute(delivery_ids: string[]): Route {
 
   const route: Waypoint[] = shortestPath.map((n) => {
     if (!n) {
-      return { lat: "0", lon: "0" };
+      return { lat: 0, lon: 0 };
     }
     return {
       lat: n.lat,

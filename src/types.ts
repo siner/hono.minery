@@ -1,8 +1,8 @@
 export type Warehouse = {
   id: string;
   name: string;
-  lat: string;
-  lon: string;
+  lat: number;
+  lon: number;
 };
 
 export type Warehouses = Warehouse[];
@@ -18,16 +18,16 @@ export type Products = Product[];
 export type Delivery = {
   id: string;
   product_ids: string[];
-  lat: string;
-  lon: string;
+  lat: number;
+  lon: number;
   delivery_date: string;
 };
 
 export type Deliveries = Delivery[];
 
 export type Waypoint = {
-  lat: string;
-  lon: string;
+  lat: number;
+  lon: number;
 };
 
 export type Route = {
