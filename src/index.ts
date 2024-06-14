@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { Warehouse, Product, Route, Delivery, Routes, Waypoint } from "./types";
 import { warehouses, products, deliveries, routes } from "./tempdb";
+import { calculateRoute } from "./utils";
 
 const app = new Hono();
 
@@ -106,13 +107,8 @@ app.post("/routes", async (c) => {
   if (!delivery_ids) {
     return c.json({ message: "Missing required fields" }, 400);
   }
-  const route: Waypoint[] = [];
-  const distance = Math.random() * 100;
-  const newRoute: Route = {
-    delivery_ids,
-    route,
-    distance,
-  };
+
+  const newRoute = calculateRoute(delivery_ids);
   routes.push(newRoute);
   return c.json(newRoute, 201);
 });

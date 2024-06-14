@@ -96,9 +96,22 @@ The route model is the following:
 }
 ```
 
+## Route calculation
+
+There are 2 approaches to calculate the best route for a delivery:
+
+1. The first approach is using the Traveling Salesman Problem (TSP) algorithm to calculate the best route. To implement this approach we are going to do the following steps (using a simplified version of the TSP algorithm):
+
+- Create a graph with the warehouses and the delivery location.
+- Calculate the shortest path between the delivery location and the warehouses.
+- Calculate the shortest path between the warehouses.
+- Calculate the shortest path between the warehouses and the delivery location.
+
+Considerations: This approach is not the best for a large number of warehouses and delivery locations. The complexity of the TSP algorithm is O(n!) and it is not efficient for a large number of nodes. We've used simplified function to calculate distances between points, not the real distance between points using roadmaps.
+
+2. The second approach is using the Google Maps API to calculate the best route.
+
 ## Future work
 
 - Implement the update and delete endpoints for warehouses, products and deliveries.
 - Implement the update and delete endpoints for routes.
-- Implement the logic to calculate the best route for a delivery.
-- Implement the logic to calculate the best route for a set of deliveries.
